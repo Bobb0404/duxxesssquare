@@ -1,0 +1,27 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Duxxess</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Notification Bell -->
+  <div id="notification-bell" onclick="openMessageCenter()">
+    🔔 <span id="bell-dot"></span>
+  </div>
+
+  <!-- Message Center Modal -->
+  <div id="message-center" class="hidden">
+    <div class="message-content">
+      <h3>📢 Updates from Duxxess Admin</h3>
+      <ul id="messages-list"></ul>
+      <button onclick="closeMessageCenter()">Close</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
