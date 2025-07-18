@@ -1,23 +1,23 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const gridContainer = document.getElementById("grid");
-  const size = 7;
+  const grid = document.getElementById("grid");
+  const gridSize = 7;
 
-  for (let row = 0; row < size; row++) {
-    for (let col = 0; col < size; col++) {
-      const cell = document.createElement("input");
-      cell.maxLength = 1;
+  for (let row = 1; row <= gridSize; row++) {
+    for (let col = 1; col <= gridSize; col++) {
+      const cell = document.createElement("div");
+      cell.classList.add("cell");
 
-      const isEvenRow = (row + 1) % 2 === 0;
-      const isEvenCol = (col + 1) % 2 === 0;
+      const isEditable = row % 2 === 1 || col % 2 === 1;
+      const isShaded = row % 2 === 0 && col % 2 === 0;
 
-      if (isEvenRow && isEvenCol) {
-        cell.className = "cell shaded";
-        cell.disabled = true;
+      if (isShaded) {
+        cell.classList.add("shaded");
       } else {
-        cell.className = "cell editable";
+        cell.setAttribute("contenteditable", "true");
+        cell.classList.add("editable");
       }
 
-      gridContainer.appendChild(cell);
+      grid.appendChild(cell);
     }
   }
 });
