@@ -1,15 +1,103 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Duxxess Square</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>7x7 Word Puzzle Grid</title>
+  <style>
+    html, body {
+      margin: 0; padding: 0; height: 100%;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: #f0f0f0;
+    }
+
+    h1 {
+      margin: 15px 0;
+      font-size: 1.8rem;
+      flex-shrink: 0;
+      text-align: center;
+      color: #333;
+    }
+
+    #grid-container {
+      width: 60vmin;      /* 60% of smaller viewport dimension */
+      height: 60vmin;     /* square grid */
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      grid-template-rows: repeat(7, 1fr);
+      gap: 2px;
+      background-color: #555;
+      border-radius: 8px;
+      box-shadow: 0 0 10px #aaa;
+    }
+
+    input.cell {
+      width: 100%;
+      height: 100%;
+      font-size: 2rem;
+      text-align: center;
+      border: none;
+      outline: none;
+      background-color: white;
+      user-select: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+    }
+
+    input.cell:focus {
+      background-color: #e0f7fa;
+      border-radius: 4px;
+      box-shadow: 0 0 5px #26a69a;
+    }
+
+    div.blocked-cell {
+      background-color: #888;
+      border-radius: 4px;
+      user-select: none;
+    }
+  </style>
 </head>
 <body>
-  <h1>Duxxess Square</h1>
-  <div id="grid"></div>
-  <script src="script.js"></script>
+
+  <h1>Word Puzzle Grid</h1>
+
+  <div id="grid-container"></div>
+
+  <script>
+    const container = document.getElementById('grid-container');
+
+    for (let row = 1; row <= 7; row++) {
+      for (let col = 1; col <= 7; col++) {
+        if (row % 2 === 1 && col % 2 === 1) {
+          // Odd row and odd column: input cell
+          const input = document.createElement('input');
+          input.type = 'text';
+          input.maxLength = 1;
+          input.classList.add('cell');
+          input.setAttribute('inputmode', 'text');  // Enable mobile keyboard
+          input.setAttribute('autocomplete', 'off');
+          input.setAttribute('autocorrect', 'off');
+          input.setAttribute('spellcheck', 'false');
+
+          // Optional: Force uppercase input
+          input.addEventListener('input', () => {
+            input.value = input.value.toUpperCase();
+          });
+
+          container.appendChild(input);
+        } else {
+          // Even row or column: shaded blocked cell
+          const block = document.createElement('div');
+          block.classList.add('blocked-cell');
+          container.appendChild(block);
+        }
+      }
+    }
+  </script>
+
 </body>
 </html>
